@@ -71,7 +71,7 @@
                 </h1>
                 <div class="is-size-5 publication-authors">
                     <span class="author-block">
-                        <a href="https://scholar.google.com/citations?user=w8-ptKYAAAAJ&amp;hl=en">Jose Fuentes</a><sup>1</sup><span class="author-equal">*</span>,
+                        <a href="https://scholar.google.com/citations?user=w8-ptKYAAAAJ&amp;hl=en">Jose Fuentes</a><sup>1</sup>,
                       </span>
                   <span class="author-block">
                     <a>Nicole Cruz</a><sup>1</sup>,
@@ -95,14 +95,14 @@
                   <div class="publication-links">
                     <!-- PDF Link. -->
                     <span class="link-block">
-                      <a href="https://arxiv.org/abs/2503.00761" class="button is-normal is-rounded is-dark">
+                      <a href="https://ieeexplore.ieee.org/document/10711803" class="button is-normal is-rounded is-dark">
                         <span class="icon">
                           <i class="fas fa-file-pdf"></i>
                         </span>
                         <span>Paper</span>
                       </a>
                     </span>
-                    <!-- Code Link. -->
+                    <!-- Code Link. 
                     <span class="link-block">
                       <a href="https://github.com/trace-robotics/trace-robotics.github.io" class="button is-normal is-rounded is-dark">
                         <span class="icon">
@@ -110,12 +110,143 @@
                         </span>
                         <span>Code</span>
                       </a>
-                    </span>
+                    </span> -->
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Abstract</h2>
+              <div class="content has-text-justified">
+                <p>
+                    Intelligent Autonomous Systems (IAS), which en-
+                    compass Unmanned Aerial Systems (UAS), Unmanned Surface
+                    Vehicles (USV), and Unmanned Underwater Vehicles (UUV),
+                    are set to play a pivotal role across multiple domains. However,
+                    due to the demanding nature of their missions (e.g., disaster
+                    response and underwater exploration), common communication
+                    methods are often limited. This makes it essential to use
+                    efficient communication strategies for learning and decision-
+                    making. This paper introduces a novel approach, leveraging
+                    distributed machine learning algorithms along with data pro-
+                    jection to achieve sublinear communication costs. Particularly,
+                    we incorporate Convolutional Neural Networks for feature
+                    extraction prior to projection, significantly enhancing efficiency
+                    and accuracy in autonomy tasks within bandwidth-constrained
+                    environments. This method uses the Johnson-Lindenstrauss
+                    transform for dimensionality reduction of both data and model
+                    parameters, facilitating efficient inter-agent communication by
+                    transmitting only projected model parameters. We further
+                    outline theoretical underpinnings showcasing the Johnson-
+                    Lindenstrauss transform’s effectiveness in maintaining con-
+                    vergence properties for Online Gradient Descent algorithms.
+                    Through experimental validation using image recognition tasks
+                    relevant to maritime surveillance, our approach demonstrates
+                    substantial reductions in communication cost while preserving
+                    high model performance.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 has-text-centered">Methodology</h2>
+          <p class="has-text-centered">
+                    Our distributed learning system for autonomous vehicles in communication-constrained 
+                    environments operates through a three-stage cycle: Feature Projection, where each
+                    agent uses a Convolutional Neural Network (CNN) to extract compact feature representations 
+                    from raw sensor data and applies the Johnson-Lindenstrauss (JL) transform to project both
+                    data and model parameters into a lower-dimensional space, preserving essential structure
+                    while drastically reducing communication costs; Surrogate Optimization, where each agent
+                    performs Online Gradient Descent (OGD) using the projected features and a reduced model
+                    architecture, maintaining theoretical convergence guarantees comparable to training on
+                    full-dimensional data; and Sequential Model Aggregation, where agents sequentially
+                    update and broadcast projected model parameters. The final agent performs an inverse
+                    projection to recover a high-fidelity model, enabling robust classification performance
+                    with sublinear communication overhead.</p>
+          <div class="box" style="margin-top: 2rem; text-align: center;">
+            <!-- Images Here-->
+            <div class="image-row">
+                <div class="image-column">
+                  <img src="assets/model_projection.png" alt="Image 1">
+                  <div class="caption">Logistic Regression Model--Orginal (Left) Surrogate (Right)</div>
+                </div>
+                <div class="image-column">
+                  <img src="assets/NN_projection.png" alt="Image 2">
+                  <div class="caption">Deep NN Model--Orginal (Left) Surrogate (Right)</div>
+                </div>
+              </div>
+              <style>
+                .image-row {
+                  display: flex;
+                  justify-content: center;
+                  gap: 20px;
+                  margin-top: 20px;
+                }
+                .image-column {
+                  text-align: center;
+                }
+                .image-column img {
+                  max-width: 100%;
+                  height: auto;
+                }
+                .caption {
+                  margin-top: 8px;
+                  font-size: 14px;
+                  color: #555;
+                }
+              </style>
+          </div>
+        </div>
+      </section>
+      
+      <section class="section">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 has-text-centered">Distributed Learning Algorithm</h2>
+          <p class="has-text-centered">
+            The distributed learning framework enables multiple autonomous agents to collaboratively train a 
+            classification model while minimizing communication costs. Each agent extracts features from local 
+            sensor data using a shared CNN, projects these features to a lower dimension via a Johnson-Lindenstrauss 
+            transform, and performs Online Gradient Descent (OGD) on the compressed data. Updated model parameters are 
+            sequentially passed to the next agent, and the final agent reconstructs the full model for deployment. 
+            This approach ensures efficient, scalable learning with sublinear communication overhead.
+            </p>
+            <div class="box" style="margin-top: 2rem; text-align: center;">
+                <div class="image-single">
+                  <img src="assets/agent_chain.png" alt="Distributed Learning Chain">
+                  <div class="caption">Illustration of distributed learning across agents using projected data and sequential OGD.</div>
+                </div>
+              
+                <style>
+                  .image-single {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    margin-top: 20px;
+                  }
+                  .image-single img {
+                    max-width: 100%;
+                    height: auto;
+                  }
+                  .caption {
+                    margin-top: 8px;
+                    font-size: 14px;
+                    color: #555;
+                    text-align: center;
+                  }
+                </style>
+              </div>              
         </div>
       </section>
 </body>
